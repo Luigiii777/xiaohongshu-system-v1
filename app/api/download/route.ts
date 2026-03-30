@@ -6,6 +6,9 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
 
+    const sortBy = searchParams.get('sortBy') as QueryFilters['sortBy'];
+    const sortOrder = searchParams.get('sortOrder') as 'asc' | 'desc';
+
     // 获取筛选参数
     const filters: QueryFilters = {
       vehicleModel: searchParams.get('vehicleModel') || undefined,
@@ -14,8 +17,8 @@ export async function GET(request: NextRequest) {
       endDate: searchParams.get('endDate') || undefined,
       ipAddress: searchParams.get('ipAddress') || undefined,
       authorNickname: searchParams.get('authorNickname') || undefined,
-      sortBy: (searchParams.get('sortBy') as 'likes' | 'favorites' | 'comments' | 'shares' | 'publishedAt') || 'publishedAt',
-      sortOrder: (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc',
+      sortBy: sortBy || 'publishedAt',
+      sortOrder: sortOrder || 'desc',
       topN: searchParams.get('topN') ? parseInt(searchParams.get('topN') || '0', 10) : undefined,
     };
 
