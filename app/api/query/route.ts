@@ -63,8 +63,10 @@ export async function GET(request: NextRequest) {
     query = query.order(sortField, { ascending: sortOrder === 'asc' });
 
     // 应用TOP N限制
-    const limit = filters.topN || filters.pageSize;
-    const offset = (filters.page - 1) * filters.pageSize;
+    const page = filters.page || 1;
+    const pageSize = filters.pageSize || 20;
+    const limit = filters.topN || pageSize;
+    const offset = (page - 1) * pageSize;
 
     query = query.range(offset, offset + limit - 1);
 
@@ -83,9 +85,9 @@ export async function GET(request: NextRequest) {
       success: true,
       data: data || [],
       total: count || 0,
-      page: filters.page,
-      pageSize: filters.pageSize,
-      totalPages: Math.ceil((count || 0) / filters.pageSize),
+      page,
+      pageSize,
+      totalPages: Math.ceil((count || 0) / pageSize),
     });
   } catch (error) {
     console.error('查询处理错误:', error);
