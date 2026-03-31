@@ -92,8 +92,8 @@ export default function FilterSection({ onQueryComplete }: FilterSectionProps) {
         params.append('authorNickname', filters.authorNickname);
       }
 
-      params.append('sortBy', filters.sortBy);
-      params.append('sortOrder', filters.sortOrder);
+      params.append('sortBy', filters.sortBy || 'publishedAt');
+      params.append('sortOrder', filters.sortOrder || 'desc');
 
       if (filters.topN) {
         params.append('topN', filters.topN.toString());
@@ -147,8 +147,8 @@ export default function FilterSection({ onQueryComplete }: FilterSectionProps) {
       params.append('authorNickname', filters.authorNickname);
     }
 
-    params.append('sortBy', filters.sortBy);
-    params.append('sortOrder', filters.sortOrder);
+    params.append('sortBy', filters.sortBy || 'publishedAt');
+    params.append('sortOrder', filters.sortOrder || 'desc');
 
     if (filters.topN) {
       params.append('topN', filters.topN.toString());
