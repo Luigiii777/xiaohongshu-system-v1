@@ -100,7 +100,7 @@ export default function FilterSection({ onQueryComplete }: FilterSectionProps) {
       }
 
       params.append('page', page.toString());
-      params.append('pageSize', filters.pageSize.toString());
+      params.append('pageSize', (filters.pageSize || 20).toString());
 
       const response = await fetch(`/api/query?${params.toString()}`);
       const result = await response.json();
