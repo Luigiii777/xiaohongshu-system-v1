@@ -6,8 +6,9 @@ export async function GET(request: NextRequest) {
   try {
     const searchParams = request.nextUrl.searchParams;
 
-    const sortBy = searchParams.get('sortBy') as QueryFilters['sortBy'];
-    const sortOrder = searchParams.get('sortOrder') as 'asc' | 'desc';
+    // 获取筛选和排序参数
+    const sortBy = (searchParams.get('sortBy') as QueryFilters['sortBy']) || 'publishedAt';
+    const sortOrder = (searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc';
 
     // 获取筛选参数
     const filters: QueryFilters = {
@@ -17,8 +18,6 @@ export async function GET(request: NextRequest) {
       endDate: searchParams.get('endDate') || undefined,
       ipAddress: searchParams.get('ipAddress') || undefined,
       authorNickname: searchParams.get('authorNickname') || undefined,
-      sortBy: sortBy || 'publishedAt',
-      sortOrder: sortOrder || 'desc',
       topN: searchParams.get('topN') ? parseInt(searchParams.get('topN') || '0', 10) : undefined,
     };
 
@@ -50,8 +49,11 @@ export async function GET(request: NextRequest) {
       query = query.ilike('author_nickname', `%${filters.authorNickname}%`);
     }
 
-    // 确定排序字段
-    const sortFieldMap = {
+    // 获取排序字段
+    const sortBy = (searchParams.get('sortBy') as QueryFilters['sortBy']) || 'publishedAt';
+    const sortOrder = (searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc';
+
+    const sortFieldMap: Record<NonNullable<QueryFilters['sortBy']>, string> = {
       likes: 'likes_count',
       favorites: 'favorites_count',
       comments: 'comments_count',
@@ -59,8 +61,8 @@ export async function GET(request: NextRequest) {
       publishedAt: 'published_at',
     };
 
-    const sortField = sortFieldMap[filters.sortBy];
-    query = query.order(sortField, { ascending: filters.sortOrder === 'asc' });
+    const sortField = sortFieldMap[sortBy!];
+    query = query.order(sortField, { ascending: sortOrder === 'asc' });
 
     // 应用TOP N限制（下载时默认限制5000条）
     const limit = filters.topN || 5000;
