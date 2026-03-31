@@ -15,6 +15,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from 'recharts';
 import {
   OverallStats,
@@ -173,10 +174,11 @@ export default function StatsSection() {
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={(entry) => `${entry.vehicleModel} (${entry.count})`}
                 outerRadius={80}
                 fill="#8884d8"
                 dataKey="count"
+                nameKey="vehicleModel"
+                label={(entry) => `${entry.name || entry.payload.vehicleModel} (${entry.value})`}
               >
                 {stats.vehicleModels.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
