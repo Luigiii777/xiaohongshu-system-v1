@@ -2,29 +2,29 @@
 
 export interface XiaohongshuPost {
   id?: number;
-  vehicleModel: string;
-  noteId: string;
-  noteUrl?: string;
-  noteType?: string;
-  noteTitle?: string;
-  noteContent?: string;
-  likesCount?: number;
-  favoritesCount?: number;
-  commentsCount?: number;
-  sharesCount?: number;
-  publishedAt?: string;
-  updatedAt?: string;
-  ipAddress?: string;
-  authorId?: string;
-  authorUrl?: string;
-  authorNickname?: string;
-  imageCount?: number;
-  coverUrl?: string;
-  imagesUrl?: string;
-  videoDuration?: string;
-  videoUrl?: string;
-  uploadedAt?: string;
-  uploadedBy?: string;
+  vehicle_model: string;
+  note_id: string;
+  note_url?: string;
+  note_type?: string;
+  note_title?: string;
+  note_content?: string;
+  likes_count?: number;
+  favorites_count?: number;
+  comments_count?: number;
+  shares_count?: number;
+  published_at?: string;
+  updated_at?: string;
+  ip_address?: string;
+  author_id?: string;
+  author_url?: string;
+  author_nickname?: string;
+  image_count?: number;
+  cover_url?: string;
+  images_url?: string;
+  video_duration?: string;
+  video_url?: string;
+  uploaded_at?: string;
+  uploaded_by?: string;
 }
 
 // JSON文件格式
@@ -87,15 +87,15 @@ export interface VehicleModelStats {
 }
 
 export interface TopNote {
-  noteId: string;
-  noteTitle: string;
-  vehicleModel: string;
-  likesCount: number;
-  favoritesCount: number;
-  commentsCount: number;
-  sharesCount: number;
-  publishedAt: string;
-  authorNickname: string;
+  note_id: string;
+  note_title: string;
+  vehicle_model: string;
+  likes_count: number;
+  favorites_count: number;
+  comments_count: number;
+  shares_count: number;
+  published_at: string;
+  author_nickname: string;
 }
 
 export interface OverallStats {
