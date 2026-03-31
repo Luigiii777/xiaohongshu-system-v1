@@ -35,8 +35,8 @@ export default function FilterSection({ onQueryComplete }: FilterSectionProps) {
         if (result.success && result.data) {
           const models = new Set<string>(['全部']);
           result.data.forEach((item: XiaohongshuPost) => {
-            if (item.vehicleModel) {
-              models.add(item.vehicleModel);
+            if (item.vehicle_model) {
+              models.add(item.vehicle_model);
             }
           });
           setVehicleModels(Array.from(models));
@@ -53,8 +53,8 @@ export default function FilterSection({ onQueryComplete }: FilterSectionProps) {
   const getIPAddresses = (data: XiaohongshuPost[]) => {
     const ips = new Set<string>(['全部']);
     data.forEach(item => {
-      if (item.ipAddress) {
-        ips.add(item.ipAddress);
+      if (item.ip_address) {
+        ips.add(item.ip_address);
       }
     });
     return Array.from(ips);

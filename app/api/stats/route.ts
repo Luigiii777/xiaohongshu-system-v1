@@ -85,15 +85,15 @@ export async function GET() {
     }
 
     const topNotes: TopNote[] = (topNotesData || []).map(note => ({
-      noteId: note.note_id,
-      noteTitle: note.note_title || '',
-      vehicleModel: note.vehicle_model,
-      likesCount: note.likes_count || 0,
-      favoritesCount: note.favorites_count || 0,
-      commentsCount: note.comments_count || 0,
-      sharesCount: note.shares_count || 0,
-      publishedAt: note.published_at || '',
-      authorNickname: note.author_nickname || '',
+      note_id: note.note_id,
+      note_title: note.note_title || '',
+      vehicle_model: note.vehicle_model,
+      likes_count: note.likes_count || 0,
+      favorites_count: note.favorites_count || 0,
+      comments_count: note.comments_count || 0,
+      shares_count: note.shares_count || 0,
+      published_at: note.published_at || '',
+      author_nickname: note.author_nickname || '',
     }));
 
     return NextResponse.json({

@@ -245,7 +245,7 @@ export default function StatsSection() {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {stats.topNotes.map((note, index) => (
-                  <tr key={note.noteId} className={`hover:bg-gray-50 ${index < 3 ? 'bg-yellow-50' : ''}`}>
+                  <tr key={note.note_id} className={`hover:bg-gray-50 ${index < 3 ? 'bg-yellow-50' : ''}`}>
                     <td className="px-4 py-3 whitespace-nowrap">
                       <span className={`inline-flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
                         index === 0 ? 'bg-yellow-400 text-white' :
@@ -258,31 +258,31 @@ export default function StatsSection() {
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap">
                       <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-                        {note.vehicleModel}
+                        {note.vehicle_model}
                       </span>
                     </td>
                     <td className="px-4 py-3 max-w-xs">
-                      <div className="truncate" title={note.noteTitle}>
-                        {note.noteTitle}
+                      <div className="truncate" title={note.note_title}>
+                        {note.note_title}
                       </div>
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center font-bold text-red-600">
-                      {note.likesCount.toLocaleString()}
+                      {note.likes_count.toLocaleString()}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center text-gray-600">
-                      {note.favoritesCount.toLocaleString()}
+                      {note.favorites_count.toLocaleString()}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center text-gray-600">
-                      {note.commentsCount.toLocaleString()}
+                      {note.comments_count.toLocaleString()}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center text-gray-600">
-                      {note.sharesCount.toLocaleString()}
+                      {note.shares_count.toLocaleString()}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
-                      {note.authorNickname}
+                      {note.author_nickname}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
-                      {note.publishedAt ? new Date(note.publishedAt).toLocaleDateString('zh-CN') : '-'}
+                      {note.published_at ? new Date(note.published_at).toLocaleDateString('zh-CN') : '-'}
                     </td>
                   </tr>
                 ))}

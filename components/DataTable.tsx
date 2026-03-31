@@ -118,39 +118,39 @@ export default function DataTable({ data, total }: DataTableProps) {
                   <tr key={item.id} className="hover:bg-gray-50">
                     <td className="px-4 py-3 whitespace-nowrap">
                       <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
-                        {item.vehicleModel}
+                        {item.vehicle_model}
                       </span>
                     </td>
                     <td className="px-4 py-3 max-w-xs">
-                      <div className="truncate" title={item.noteTitle || '-'}>
-                        {item.noteTitle || '-'}
+                      <div className="truncate" title={item.note_title || '-'}>
+                        {item.note_title || '-'}
                       </div>
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
-                      {item.noteType || '-'}
+                      {item.note_type || '-'}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-900">
-                      <span className={`font-medium ${(item.likesCount || 0) > 100 ? 'text-red-600' : 'text-gray-600'}`}>
-                        {item.likesCount || 0}
+                      <span className={`font-medium ${(item.likes_count || 0) > 100 ? 'text-red-600' : 'text-gray-600'}`}>
+                        {item.likes_count || 0}
                       </span>
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-600">
-                      {item.favoritesCount || 0}
+                      {item.favorites_count || 0}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-600">
-                      {item.commentsCount || 0}
+                      {item.comments_count || 0}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-center text-sm text-gray-600">
-                      {item.sharesCount || 0}
+                      {item.shares_count || 0}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
-                      {formatDate(item.publishedAt)}
+                      {formatDate(item.published_at)}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
-                      {item.authorNickname || '-'}
+                      {item.author_nickname || '-'}
                     </td>
                     <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-600">
-                      {item.ipAddress || '-'}
+                      {item.ip_address || '-'}
                     </td>
                   </tr>
                 ))}
