@@ -35,8 +35,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 提取所有数据条目
-    const postsToInsert: XiaohongshuPost[] = [];
+    // 提取所有数据条目并去重
+    const postsMap = new Map<string, XiaohongshuPost>();
 
     // 遍历所有Sheet
     for (const sheetName in jsonData.内容) {
@@ -44,9 +44,11 @@ export async function POST(request: NextRequest) {
 
       if (sheetData && sheetData.数据) {
         for (const item of sheetData.数据) {
-          postsToInsert.push({
+          const noteId = item.笔记ID;
+          // 使用 Map 去重，相同 note_id 保留最新的数据
+          postsMap.set(noteId, {
             vehicle_model: vehicleModel,
-            note_id: item.笔记ID,
+            note_id: noteId,
             note_url: item.笔记链接,
             note_type: item.笔记类型,
             note_title: item.笔记标题,
@@ -73,6 +75,8 @@ export async function POST(request: NextRequest) {
       }
     }
 
+    const postsToInsert = Array.from(postsMap.values());
+
     if (postsToInsert.length === 0) {
       return NextResponse.json(
         { error: '文件中没有有效数据' },
@@ -81,12 +85,12 @@ export async function POST(request: NextRequest) {
     }
 
     // 批量插入到数据库
-    // Supabase 会自动处理唯一性约束冲突（note_id已存在时跳过）
+    // 确保同一条记录不会在同一次操作中重复
     const { data, error } = await supabase
       .from(TABLES.POSTS)
       .upsert(postsToInsert, {
         onConflict: 'note_id',
-        ignoreDuplicates: false, // 保留已存在的记录
+        ignoreDuplicates: true, // 忽略冲突而不是更新
       })
       .select();
 
