@@ -49,10 +49,6 @@ export async function GET(request: NextRequest) {
       query = query.ilike('author_nickname', `%${filters.authorNickname}%`);
     }
 
-    // 获取排序字段
-    const sortBy = (searchParams.get('sortBy') as QueryFilters['sortBy']) || 'publishedAt';
-    const sortOrder = (searchParams.get('sortOrder') || 'desc') as 'asc' | 'desc';
-
     const sortFieldMap: Record<NonNullable<QueryFilters['sortBy']>, string> = {
       likes: 'likes_count',
       favorites: 'favorites_count',
